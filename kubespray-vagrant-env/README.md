@@ -1,5 +1,7 @@
 ### VM Environment
-![VM-env](https://github.com/manote101/kubernetes/blob/master/kubespray-vagrant-env/4%20Nodes%20Cluster%20-%20Kubespray.png)
+![VM-env](https://github.com/manote101/kubernetes/blob/manote-branch/kubespray-vagrant-env/image/4%20Nodes%20Cluster%20-%20Kubespray.png)
+
+![targettend-cluster](https://github.com/manote101/kubernetes/blob/manote-branch/kubespray-vagrant-env/image/4%20Nodes%20Cluster%20Config.png)
 
 ### Prepare you Ansible Host
 ```
