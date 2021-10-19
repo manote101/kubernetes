@@ -54,6 +54,11 @@ cat inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 
 # Deploy Kubespray with Ansible Playbook - run the playbook
 ansible-playbook -i inventory/mycluster/hosts.yaml  -user=root cluster.yml
+
+# check whether your K8s cluster is running fine
+kubectl version --short
+kubectl cluster-info
+kubectl get node
 ```
 
 ### How to Add node(s)
