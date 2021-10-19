@@ -23,6 +23,6 @@ ansible-playbook -i inventory/mycluster/hosts.yml --user root scale.yml
 ### How to Remove node(s)
  run Ansible playbook
 ```sh
-ansible-playbook -i inventory/mycluster/hosts.yml --user root remove-node.yml --extra-vars "node=node5"   
+ansible-playbook -i inventory/mycluster/hosts.yaml --user root remove-node.yml --extra-vars "node=node5"   
 # ตัวอย่างเป็นการลบ node5, ถ้าต้องการลบมากกว่า  1 node สามารถคั่นด้วยเครื่องหมาย comma
 ```
