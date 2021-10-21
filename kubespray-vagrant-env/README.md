@@ -13,19 +13,16 @@ apt-get install python3 -y
 # check whether pip3 is available by running 'which pip3', if it is not there then run
 apt-get install python3-pip -y
 
-# 3. install required packages (Ansible and its required tools)
-pip3 install -r requirements.txt
+# 3. Generate SSH key-pair - key-pair file will be saved in ~/.ssh directory
+ssh-keygen -N ""
 
-# 4. Generate SSH key-pair - key-pair file will be saved in ~/.ssh directory
-ssh-keygen -t ecdsa -N ""
+# 4. Copy public key to every hosts 
+ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.101
+ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.102
+ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.103
+ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.104
 
-# 5. Copy public key to every hosts 
-ssh-copy-id -i ~/.ssh/id_ecdsa root@172.16.16.101
-ssh-copy-id -i ~/.ssh/id_ecdsa root@172.16.16.102
-ssh-copy-id -i ~/.ssh/id_ecdsa root@172.16.16.103
-ssh-copy-id -i ~/.ssh/id_ecdsa root@172.16.16.104
-
-# 6. Verify that we can use SSH to log-on without password
+# 5. Verify that we can use SSH to log-on without password
 ssh root@172.16.16.101
 ssh root@172.16.16.102
 ssh root@172.16.16.103
@@ -34,9 +31,12 @@ ssh root@172.16.16.104
 
 ### Install Kubespray - refer to Kubespray repo, https://github.com/kubernetes-sigs/kubespray
 ```ShellSession
-# 7. Install & Configure K8s by Kubespray
+# 6. Install & Configure K8s by Kubespray
 git clone https://github.com/kubernetes-sigs/kubespray.git
 cd kubespray
+
+# 7. install required packages (Ansible and its required tools)
+pip3 install -r requirements.txt
 
 # Copy ``inventory/sample`` as ``inventory/mycluster``
 cp -rfp inventory/sample inventory/mycluster
