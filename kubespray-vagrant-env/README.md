@@ -11,6 +11,7 @@ apt-get install python3 -y
 
 # 2. install pip3
 # check whether pip3 is available by running 'which pip3', if it is not there then run
+apt-get update
 apt-get install python3-pip -y
 
 # 3. Generate SSH key-pair - key-pair file will be saved in ~/.ssh directory
@@ -31,11 +32,11 @@ ssh root@172.16.16.104
 
 ### Install Kubespray - refer to Kubespray repo, https://github.com/kubernetes-sigs/kubespray
 ```ShellSession
-# 6. Install & Configure K8s by Kubespray
+# Install & Configure K8s by Kubespray
 git clone https://github.com/kubernetes-sigs/kubespray.git
 cd kubespray
 
-# 7. install required packages (Ansible and its required tools)
+# install required packages (Ansible and its required tools)
 pip3 install -r requirements.txt
 
 # Copy ``inventory/sample`` as ``inventory/mycluster``
@@ -53,7 +54,7 @@ cat inventory/mycluster/group_vars/all/all.yml
 cat inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 
 # Deploy Kubespray with Ansible Playbook - run the playbook
-ansible-playbook -i inventory/mycluster/hosts.yaml  -user=root cluster.yml
+ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml
 
 # check whether your K8s cluster is running fine
 kubectl version --short
