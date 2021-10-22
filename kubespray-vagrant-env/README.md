@@ -5,16 +5,8 @@
 
 ### On Ansible Host: prepare necessary tools
 ```ShellSession
-# 1. install python3 
-# check whether python3 is available by running 'which python3', if it is not there then run
-apt-get install python3 -y
-
-# 2. install pip3
-# check whether pip3 is available by running 'which pip3', if it is not there then run
-apt-get update
-apt-get install python3-pip -y
-
-# 3. Generate SSH key-pair - key-pair file will be saved in ~/.ssh directory
+# Prepare you VM to allow SSH access
+# Generate SSH key-pair - key-pair file will be saved in ~/.ssh directory
 ssh-keygen -N ""
 
 # 4. Copy public key to every hosts 
@@ -23,7 +15,7 @@ ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.102
 ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.103
 ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.104
 
-# 5. Verify that we can use SSH to log-on without password
+# Verify that we can use SSH to log-on without password
 ssh root@172.16.16.101
 ssh root@172.16.16.102
 ssh root@172.16.16.103
@@ -32,9 +24,18 @@ ssh root@172.16.16.104
 
 ### Install Kubespray - refer to Kubespray repo, https://github.com/kubernetes-sigs/kubespray
 ```ShellSession
-# Install & Configure K8s by Kubespray
+# Git clone from Kubespray repo
 git clone https://github.com/kubernetes-sigs/kubespray.git
 cd kubespray
+
+# install required python3 package for Ansible
+# check whether python3 is available by running 'which python3', if it is not there then run
+apt-get install python3 -y
+
+# Install pip3
+# check whether pip3 is available by running 'which pip3', if it is not there then run
+apt-get update
+apt-get install python3-pip -y
 
 # install required packages (Ansible and its required tools)
 pip3 install -r requirements.txt
@@ -68,7 +69,6 @@ kubectl get node
 # เพิ่มข้อมูลของ new node ลงในไฟล์ inventory/mycluster/hosts.yaml พร้อมระบุ role (i.e. kube-master, kube-node, etcd)
 # พร้อมทั้งเตรียมให้สามารถ SSH เข้า node5 ได้โดยไม่ต้องใส่ password
 vi inventory/mycluster/hosts.yaml
-ssh-copy-id -i ~/.ssh/id_ecdsa root@node5
 
 # run ansible playbook
 ansible-playbook -i inventory/mycluster/hosts.yaml --user root scale.yml
