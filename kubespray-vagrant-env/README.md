@@ -9,7 +9,7 @@
 # Generate SSH key-pair - key-pair file will be saved in ~/.ssh directory
 ssh-keygen -N ""
 
-# 4. Copy public key to every hosts 
+# Copy public key to every hosts 
 ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.101
 ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.102
 ssh-copy-id -i ~/.ssh/id_rsa root@172.16.16.103
